@@ -1,4 +1,4 @@
-# NIXStats.js is CLI and JavaScript Wrapper for NIXStats
+# NIXStats.js is CLI and JavaScript Wrapper for [NIXStats](https://nixstats.com)
 
 ## Using as CLI
 
