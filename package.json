@@ -1,0 +1,36 @@
+{
+  "name": "nixstats",
+  "description": "CLI and JavaScript Wrapper for NIXStats",
+  "version": "0.0.1",
+  "main": "lib",
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/goenning/nixstats-js.git"
+  },
+  "bugs": {
+    "url": "http://github.com/goenning/nixstats-js/issues"
+  },
+  "author": "Guilherme Oenning <oenning.ti@gmail.com> (http://goenning.net)",
+  "bin": {
+    "nixstats": "bin/cli.js"
+  },
+  "tags": [
+    "nixstats",
+    "unix",
+    "monitoring"
+  ],
+  "license": "Apache-2.0",
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "cli-color": "^1.1.0",
+    "clui": "^0.3.1",
+    "meow": "^3.7.0",
+    "request": "^2.72.0"
+  },
+  "devDependencies": {
+    "eslint": "^2.12.0"
+  }
+}
