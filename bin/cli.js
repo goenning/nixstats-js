@@ -32,6 +32,6 @@ if (cli.input.length > 0) {
       console.log(clc.red(err));
     });
   } else {
-    console.log(clc.red(`Command '${commandName}' is unknown.`));
+    console.log(clc.red(`Command '${commandName}' is unknown`));
   }
 } else cli.showHelp();
