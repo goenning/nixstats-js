@@ -14,7 +14,7 @@ Run `nixstats config <your_token_goes_here>`
 
 Run `nixstats now` to see current servers situation.
 
-!PUT DEMO IMAGE HERE!
+![](nixstats.png)
 
 ### Help
 
