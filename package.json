@@ -1,7 +1,7 @@
 {
   "name": "nixstats",
   "description": "CLI and JavaScript Wrapper for NIXStats",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "lib",
   "scripts": {
     "lint": "eslint ."
