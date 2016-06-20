@@ -28,13 +28,14 @@ function directoryExists(path) {
 
 function writeConfigFile(content) {
   ensureDirectoryExistence(configFile);
+  debug('Token stored in configuration file.');
   fs.writeFileSync(configFile, content);
 }
 
 function readConfigFile() {
   try {
     var json = JSON.parse(fs.readFileSync(configFile, 'UTF-8'));
-    debug('Configuration file was found.');
+    debug('Configuration file found.');
     return json;
   } catch (err){
     debug('Could not read configuration file.', err);
@@ -45,7 +46,7 @@ function readConfigFile() {
 function removeConfigFile() {
   try {
     fs.unlinkSync(configFile);
-    debug('Configuration file was removed.');
+    debug('Configuration file removed.');
     return true;
   } catch (err){
     debug('Could not remove configuration file.', err);
