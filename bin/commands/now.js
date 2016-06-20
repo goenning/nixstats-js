@@ -1,61 +1,40 @@
 'use strict';
 
-var CLI = require('clui'),
-    clc = require('cli-color');
+var cliff = require('cliff');
+var debug = require('debug')('nixstats');
 
-var Line          = CLI.Line,
-    LineBuffer    = CLI.LineBuffer;
+var formatStatus = (status) => {
+  var upper = status.toUpperCase();
+  return upper == 'UP' ? upper.green : upper.red;
+};
 
-function printDomains(outputBuffer, domains) {
-  new Line(outputBuffer)
-    .column('Domain', 40, [clc.cyan])
-    .column('Status', 7, [clc.cyan])
-    .column('Uptime', 8, [clc.cyan])
-    .fill()
-    .store();
-
+function printDomains(domains) {
+  var rows = [ [ 'Domain', 'Status', 'Uptime'] ];
   for (var domain of domains) {
-    new Line(outputBuffer)
-      .column(domain.name, 40)
-      .column(domain.status.toUpperCase(), 7, [domain.status == 'up' ? clc.green : clc.red])
-      .column(parseFloat(domain.uptime_percentage.toFixed(3)) + '%', 8)
-      .fill()
-      .store();
+    rows.push([domain.name, formatStatus(domain.status), parseFloat(domain.uptime_percentage.toFixed(3)) + '%']);
   }
+  console.log(cliff.stringifyRows(rows, ['inverse','inverse','inverse']));
 }
 
-function printServers(outputBuffer, servers) {
-  new Line(outputBuffer)
-    .column('Server', 40, [clc.cyan])
-    .column('Status', 7, [clc.cyan])
-    .column('Uptime', 7, [clc.cyan])
-    .column('Load', 16, [clc.cyan])
-    .fill()
-    .store();
-
+function printServers(servers) {
+  var rows = [ [ 'Server', 'Status', 'Uptime', 'Load'] ];
   for (var server of servers) {
-    new Line(outputBuffer)
-      .column(server.name, 40)
-      .column(server.status.toUpperCase(), 7, [server.status == 'up' ? clc.green : clc.red])
-      .column(parseFloat(server.uptime.toFixed(3)) + '%', 7)
-      .column(server.last_data.load, 16)
-
-      .fill()
-      .store();
+    rows.push([server.name, formatStatus(server.status), parseFloat(server.uptime.toFixed(3)) + '%', server.last_data.load]);
   }
+  console.log(cliff.stringifyRows(rows, ['inverse','inverse','inverse','inverse']));
 }
 
-module.exports = function(nsClient) {
+module.exports = function(nsClient, cli) {
   return Promise.all([
     nsClient.domain.list(),
     nsClient.server.list()
   ]).then((result) => {
 
-    var outputBuffer = new LineBuffer();
-    printDomains(outputBuffer, result[0].domains);
-    new Line(outputBuffer).fill().store();
-    printServers(outputBuffer, result[1].servers);
-    outputBuffer.output();
+    debug(`API call returned ${result[0].domains.length} domains and ${result[1].servers.length} servers.`);
+
+    printDomains(result[0].domains);
+    console.log();
+    printServers(result[1].servers);
 
   });
 };

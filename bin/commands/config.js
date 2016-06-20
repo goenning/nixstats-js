@@ -2,10 +2,10 @@
 
 var configStore = require('../config-store.js');
 
-module.exports = function(nsClient, args) {
+module.exports = function(nsClient, cli) {
   return new Promise((resolve, reject) => {
     try {
-      configStore.write(JSON.stringify( { token: args[1] } ));
+      configStore.write(JSON.stringify( { token: cli.input[1] } ));
       resolve();
     } catch(err) {
       reject(err);

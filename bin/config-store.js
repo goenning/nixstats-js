@@ -2,6 +2,7 @@
 
 var fs = require('fs');
 var path = require('path');
+var debug = require('debug')('nixstats');
 
 var sep = (process.platform == 'win32') ? '\\' : '/';
 var homeDir = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
@@ -32,8 +33,11 @@ function writeConfigFile(content) {
 
 function readConfigFile() {
   try {
-    return JSON.parse(fs.readFileSync(configFile, 'UTF-8'));
+    var json = JSON.parse(fs.readFileSync(configFile, 'UTF-8'));
+    debug('Configuration file was found.');
+    return json;
   } catch (err){
+    debug('Could not read configuration file.', err);
     return { };
   }
 }
@@ -41,8 +45,10 @@ function readConfigFile() {
 function removeConfigFile() {
   try {
     fs.unlinkSync(configFile);
+    debug('Configuration file was removed.');
     return true;
   } catch (err){
+    debug('Could not remove configuration file.', err);
     return false;
   }
 }
