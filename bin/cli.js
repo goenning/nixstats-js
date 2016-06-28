@@ -4,7 +4,7 @@
 var meow = require('meow');
 var commands = require('./commands');
 var ns = require('../lib');
-var clear = require('cli-clear');
+var clear = require('clear');
 var configStore = require('./config-store.js');
 var debug = require('debug')('nixstats');
 

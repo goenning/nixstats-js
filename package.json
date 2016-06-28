@@ -1,7 +1,7 @@
 {
   "name": "nixstats",
   "description": "CLI and JavaScript Wrapper for NIXStats",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "main": "lib",
   "scripts": {
     "lint": "eslint ."
@@ -25,7 +25,7 @@
   "license": "Apache-2.0",
   "readmeFilename": "README.md",
   "dependencies": {
-    "cli-clear": "^1.0.4",
+    "clear": "0.0.1",
     "cliff": "^0.1.10",
     "debug": "^2.2.0",
     "meow": "^3.7.0",
